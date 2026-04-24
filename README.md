@@ -1,32 +1,54 @@
-# Extract-file-from-mail-to-Sharepoint
-This is a simple method to extract and configure power automate to extract file from outlook mail to Sharepoint with specific **Subject** condition
+# Extract File from Email to SharePoint
 
-<img width="609" height="628" alt="image" src="https://github.com/user-attachments/assets/61e30af9-f05b-4844-8e1c-57673193effd" />
+This guide shows how to configure a flow in Microsoft Power Automate to automatically extract email attachments from Outlook and upload them to SharePoint based on a specific **Subject** condition.
 
-First of all create new **Outlook Task** and login with your credentials. 
-
-Set:
-
-  1- _Include Attachments_ = **Yes**
-  
-  2- _Only with attachments_ = **Yes**
-  
-  3- _Folder_ = **Inbox**
-
-<img width="616" height="475" alt="image" src="https://github.com/user-attachments/assets/b6fcfeb6-18e1-4d03-86fb-2649f56cd6b8" />
+![Outlook Trigger](https://github.com/user-attachments/assets/61e30af9-f05b-4844-8e1c-57673193effd)
 
 
-Add **Condition Task** and setup with the following parameters:
+---
+
+## 📌 Step 1 — Create Outlook Trigger
+
+Create a new **Outlook trigger** and log in with your credentials.
+
+Set the following parameters:
+
+- **Include Attachments** = Yes  
+- **Only with Attachments** = Yes  
+- **Folder** = Inbox  
+
+<img width="616" height="475" alt="image" src="https://github.com/user-attachments/assets/fa0cae17-de8c-461c-945a-cda3cbbebc0b" />
 
 
-<img width="623" height="419" alt="image" src="https://github.com/user-attachments/assets/4cc1569f-f0d7-47eb-853d-652c57ed3c33" />
+---
 
-Create file using Sharepoint Task, set your Company site Address and Folder Path to locate your files. Configure your File Name as you prefer, if you want timestamp on the name you can use the following expression:
+## 📌 Step 2 — Add Condition
 
-%python
-concat('Import_', formatDateTime(utcNow(),'yyyyMMdd),'.xlsx')
+Add a **Condition** action and configure it based on the email **Subject**.
 
-<img width="1150" height="538" alt="image" src="https://github.com/user-attachments/assets/1cdfbc5b-9cb8-4be7-acf8-46bd31bf0779" />
+![Condition](https://github.com/user-attachments/assets/4cc1569f-f0d7-47eb-853d-652c57ed3c33)
+
+---
+
+## 📌 Step 3 — Create File in SharePoint
+
+Add a **SharePoint – Create file** action.
+
+Configure:
+- **Site Address** = your company SharePoint site  
+- **Folder Path** = destination folder  
+
+You can customize the file name.  
+To include a timestamp, use this expression:
+
+```text
+concat('Import_', formatDateTime(utcNow(),'yyyyMMdd'), '.xlsx')
+```
+
+<img width="1150" height="538" alt="image" src="https://github.com/user-attachments/assets/a202f4b7-8c88-4bec-b469-ad18cfa2e6e3" />
+
+
+
 
 
 
